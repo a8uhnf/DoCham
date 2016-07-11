@@ -1,0 +1,19 @@
+{
+  "name": "DoCham",
+  "version": "1.0.0",
+  "description": "Chamber management",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HadockHanif/DoCham.git"
+  },
+  "author": "Hanifa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HadockHanif/DoCham/issues"
+  },
+  "homepage": "https://github.com/HadockHanif/DoCham"
+}
