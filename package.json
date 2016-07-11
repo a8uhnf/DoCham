@@ -2,7 +2,7 @@
   "name": "DoCham",
   "version": "1.0.0",
   "description": "Chamber management",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "gulp"
   },
@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/HadockHanif/DoCham/issues"
   },
-  "homepage": "https://github.com/HadockHanif/DoCham"
+  "homepage": "https://github.com/HadockHanif/DoCham",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-uglify": "^1.5.4",
+    "jshint": "^2.9.2"
+  }
 }
