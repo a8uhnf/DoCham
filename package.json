@@ -18,7 +18,10 @@
   "homepage": "https://github.com/HadockHanif/DoCham",
   "dependencies": {
     "backbone": "^1.2.3",
-    "lodash": "~3.10.1"
+    "gulp-concat": "^2.6.0",
+    "gulp-html-replace": "^1.6.1",
+    "jquery": "^3.1.0",
+    "lodash": "^3.10.1"
   },
   "devDependencies": {
     "browser-sync": "^2.13.0",
