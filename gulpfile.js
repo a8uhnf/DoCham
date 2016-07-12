@@ -1,18 +1,44 @@
-// Include gulp
+/* eslint-disable func-names */
+
+/* REQUIRES */
 const gulp = require('gulp');
 
-// Include Our Plugins
-const jshint = require('gulp-jshint');
-const sass = require('gulp-sass');
-const concat = require('gulp-concat');
-const uglify = require('gulp-uglify');
-const rename = require('gulp-rename');
-const browserSync = require('browser-sync');
-const runSequence = require('run-sequence');
-const del = require('del');
-const htmlreplace = require('gulp-html-replace');
-
+// Helper libraries
 const _ = require('lodash');
+const del = require('del');
+const gutil = require('gulp-util');
+const runSequence = require('run-sequence');
+const exec = require('child_process').exec;
+
+// Linting
+const eslint = require('gulp-eslint');
+const sassLint = require('gulp-sass-lint');
+
+// Browser sync
+const browserSync = require('browser-sync').create();
+
+// File I/O
+const sass = require('gulp-sass');
+const uglify = require('gulp-uglify');
+// const replace = require('gulp-replace');
+const htmlreplace = require('gulp-html-replace');
+// Browserify
+const buffer = require('vinyl-buffer');
+const source = require('vinyl-source-stream');
+const babelify = require('babelify');
+const watchify = require('watchify');
+const streamify = require('gulp-streamify');
+const browserify = require('browserify');
+const aliasify = require('aliasify');
+const sourcemaps = require('gulp-sourcemaps');
+const nunjucks = require('gulp-nunjucks');
+const concat = require('gulp-concat');
+const cleanCSS = require('gulp-clean-css');
+const merge = require('merge-stream');
+const glob = require('glob');
+const globalShim = require('browserify-global-shim').configure({
+    'jquery': '$'
+});
 const paths = {
     html: {
         files: 'index.html',
@@ -50,12 +76,6 @@ gulp.task('templates', function() {
 gulp.task('html:prod', function() {
     gulp.src('index.html')
         .pipe(gulp.dest('dist/index.html'));
-});
-// Lint Task
-gulp.task('lint', function() {
-    return gulp.src('js/*.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'));
 });
 
 // Compile Our Sass
@@ -170,6 +190,14 @@ gulp.task('lint:css', function() {
         .pipe(sassLint.failOnError());
 });
 
+/* Lints the JS files */
+gulp.task('lint:js', function() {
+    return gulp.src(paths.js.files)
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+});
+
 /* Compiles SCSS files into CSS files and copies them to the distribution directory */
 gulp.task('scss', function() {
     const scssStream = gulp.src(paths.scss.files)
@@ -213,7 +241,7 @@ gulp.task('watch', function() {
 gulp.task('reload', function() {
     browserSync.reload();
 });
-gulp.task('build:dev', ['html:dev', 'lint', 'sass', 'watch']);
+gulp.task('build:dev', ['html:dev', 'templates', 'js:dev', 'sass', 'watch']);
 // Default Task
 gulp.task('default', function(done) {
     runSequence('clean', 'build:dev', 'serve', function(error) {
