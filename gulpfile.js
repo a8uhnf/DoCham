@@ -1,13 +1,26 @@
 // Include gulp
-var gulp = require('gulp');
+const gulp = require('gulp');
 
 // Include Our Plugins
-var jshint = require('gulp-jshint');
-var sass = require('gulp-sass');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
+const jshint = require('gulp-jshint');
+const sass = require('gulp-sass');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const rename = require('gulp-rename');
 
+const files = {
+    html: {
+        file: 'index.html'
+    },
+    dist: {
+
+    }
+};
+
+gulp.task('html:prod', function() {
+    gulp.src('index.html')
+        .pipe(gulp.dest('dist/index.html'));
+});
 // Lint Task
 gulp.task('lint', function() {
     return gulp.src('js/*.js')
@@ -38,5 +51,6 @@ gulp.task('watch', function() {
     gulp.watch('scss/*.scss', ['sass']);
 });
 
+gulp.task('gulp:prod', ['html:prod', 'lint', 'sass', 'scripts', 'watch']);
 // Default Task
-gulp.task('default', ['lint', 'sass', 'scripts', 'watch']);
+gulp.task('default', );
