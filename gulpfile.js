@@ -7,7 +7,9 @@ const sass = require('gulp-sass');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
-
+const browserSync = require('browser-sync');
+const runSequence = require('run-sequence');
+const del = require('del');
 const files = {
     html: {
         file: 'index.html'
@@ -45,12 +47,21 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest('dist/js'));
 });
 
+//clean dist folder
+gulp.task('clean', function() {
+    console.log('cleaning distribution folder');
+    return del('dist');
+});
+
+
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('js/*.js', ['lint', 'scripts']);
     gulp.watch('scss/*.scss', ['sass']);
 });
 
-gulp.task('gulp:prod', ['html:prod', 'lint', 'sass', 'scripts', 'watch']);
+gulp.task('build:dev', ['html:prod', 'lint', 'sass', 'scripts', 'watch']);
 // Default Task
-gulp.task('default', );
+gulp.task('default', function() {
+    runSequence('clean', )
+});
