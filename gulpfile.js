@@ -52,7 +52,15 @@ gulp.task('clean', function() {
     console.log('cleaning distribution folder');
     return del('dist');
 });
-
+gulp.task('serve', function() {
+    browserSync.init({
+        port: 5990,
+        open: false,
+        server: {
+            baseDir: 'dist/'
+        }
+    });
+});
 
 // Watch Files For Changes
 gulp.task('watch', function() {
@@ -63,7 +71,7 @@ gulp.task('watch', function() {
 gulp.task('build:dev', ['html:prod', 'lint', 'sass', 'scripts', 'watch']);
 // Default Task
 gulp.task('default', function(done) {
-    runSequence('clean', 'build:dev', function() {
+    runSequence('clean', 'build:dev', 'serve', function(error) {
         done(error && error.err);
     });
 });
