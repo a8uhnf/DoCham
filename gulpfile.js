@@ -62,6 +62,8 @@ gulp.task('watch', function() {
 
 gulp.task('build:dev', ['html:prod', 'lint', 'sass', 'scripts', 'watch']);
 // Default Task
-gulp.task('default', function() {
-    runSequence('clean', )
+gulp.task('default', function(done) {
+    runSequence('clean', 'build:dev', function() {
+        done(error && error.err);
+    });
 });
