@@ -1,32 +1,15 @@
 {
   "name": "DoCham",
+  "description": "Doctor's Chamber management system",
   "version": "1.0.0",
-  "description": "Chamber management",
-  "main": "app.js",
-  "scripts": {
-    "test": "gulp"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/HadockHanif/DoCham.git"
-  },
-  "author": "Hanifa",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/HadockHanif/DoCham/issues"
-  },
-  "homepage": "https://github.com/HadockHanif/DoCham",
+  "authors": [
+    "Abu Hanifa"
+  ],
   "dependencies": {
-    "aliasify": "^2.0.0",
-    "babelify": "^7.3.0",
     "backbone": "^1.2.3",
-    "browserify": "^13.0.1",
-    "glob": "^7.0.5",
-    "gulp-concat": "^2.6.0",
-    "gulp-html-replace": "^1.6.1",
-    "jquery": "^3.1.0",
-    "lodash": "^3.10.1",
-    "watchify": "^3.7.0"
+    "backbone.analytics": "^1.0.2",
+    "js-cookie": "^2.1.0",
+    "lodash": "~3.10.1"
   },
   "devDependencies": {
     "ajv": "^3.8.7",
@@ -78,5 +61,6 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.6.0"
-  }
+  },
+  "private": true
 }

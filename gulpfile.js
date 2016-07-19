@@ -96,13 +96,13 @@ gulp.task('serve', function() {
         port: 5990,
         open: false,
         server: {
-            baseDir: 'dist/index.html'
+            baseDir: 'dist/'
         }
     });
 });
 
 gulp.task('html:dev', function() {
-    return gulp.src('./index.html')
+    return gulp.src('index.html')
         .pipe(htmlreplace({
             'app_js': './assets/js/app.js'
         }))
@@ -143,8 +143,11 @@ function bundle(b, name) {
 /* Browserifies the JS files and copies the bundle into the distribution file (dev) */
 gulp.task('js:dev', function() {
     glob(paths.js.apps, null, function(err, files) {
+        console.log('hanifa', files, err);
         _.each(files, function(file) {
+            console.log(' hanifa _each', file);
             const name = file.substring(file.lastIndexOf('/') + 1);
+            console.log(name,'11111111111111111');
             const b = browserify({
                 plugin: [watchify],
                 cache: {},
@@ -241,10 +244,10 @@ gulp.task('watch', function() {
 gulp.task('reload', function() {
     browserSync.reload();
 });
-gulp.task('build:dev', ['html:dev', 'templates', 'js:dev', 'sass', 'watch']);
+gulp.task('build:dev', ['html:dev', 'templates', 'js:dev']);
 // Default Task
 gulp.task('default', function(done) {
-    runSequence('clean', 'build:dev', 'serve', function(error) {
+    runSequence('clean', 'build:dev', 'watch', 'serve', function(error) {
         done(error && error.err);
     });
 });

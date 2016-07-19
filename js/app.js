@@ -1,2 +1,2 @@
-const Backbone = require('backbone');
-const $ = require('jquery');
+var Backbone = require('backbone');
+// const $ = require('jquery');
