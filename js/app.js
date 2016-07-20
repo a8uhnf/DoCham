@@ -1,8 +1,6 @@
-var Backbone = require('backbone');
-Backbone.$ = $;
-var Router = require('./router/router');
-
-global.router = new Router({});
+const Backbone = require('backbone');
+// Backbone.$ = $;
+const Router = require('./router/router');
+global.router = new Router({name: 'hello world'});
+// global.nunjucksEnv = new global.nunjucks.Environment(new global.nunjucks.PrecompiledLoader());
 Backbone.history.start();
-
-// var $ = require('jquery');

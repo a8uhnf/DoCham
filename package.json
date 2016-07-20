@@ -1,9 +1,9 @@
 {
   "name": "DoCham",
-  "description": "Doctor's Chamber management system",
+  "description": "Doctor management website",
   "version": "1.0.0",
   "authors": [
-    "Abu Hanifa"
+    "abu hanifa"
   ],
   "dependencies": {
     "backbone": "^1.2.3",
