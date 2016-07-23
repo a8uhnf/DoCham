@@ -51,7 +51,7 @@ const paths = {
     json_schema: {
         files: 'json-schema/**/*.json',
         srcDir: 'json-schema/**/*.json',
-        destDIR: 'dist/appscode/assets/json-schema'
+        destDIR: 'dist/assets/json-schema'
     },
     js: {
         apps: 'js/app.js',
@@ -77,19 +77,19 @@ const paths = {
             'node_modules/html5shiv/dist/html5shiv.min.js',
             'node_modules/respond.js/dest/respond.min.js'
         ],
-        destDir: 'dist/appscode/assets/js_ext'
+        destDir: 'dist/assets/js_ext'
     },
 
     templates: {
         files: ['templates/**/*.html'],
         srcDir: 'templates',
-        destDir: 'dist/appscode/assets/templates'
+        destDir: 'dist/assets/templates'
     },
 
     scss: {
         files: ['scss/**/*.scss'],
         srcDir: 'scss',
-        destDir: 'dist/appscode/assets/css'
+        destDir: 'dist/assets/css'
     },
 
     css_ext: {
@@ -103,7 +103,7 @@ const paths = {
     images: {
         files: ['images/**/*', 'node_modules/ion-rangeslider/img/sprite-skin-flat.png'],
         srcDir: 'images',
-        destDir: 'dist/appscode/assets/images'
+        destDir: 'dist/assets/images'
     },
 
     fonts: {
@@ -117,7 +117,7 @@ const paths = {
             'node_modules/font-awesome/fonts/fontawesome-webfont.woff'
         ],
         srcDir: 'fonts',
-        destDir: 'dist/appscode/assets/fonts'
+        destDir: 'dist/assets/fonts'
     }
 };
 
@@ -196,12 +196,12 @@ gulp.task('html:prod', function () {
             const filePath = file.substring(file.indexOf('/') + 1, file.lastIndexOf('/'));
             return gulp.src(file)
                 .pipe(htmlreplace({
-                    'pharm_js': '../appscode/assets/js/pharm.app.js',
-                    'ci_js': '../appscode/assets/js/ci.app.js',
-                    'artifactory_js': '../appscode/assets/js/artifactory.app.js',
+                    'pharm_js': '../assets/js/pharm.app.js',
+                    'ci_js': '../assets/js/ci.app.js',
+                    'artifactory_js': '../assets/js/artifactory.app.js',
                     'js_ext': ext,
                     'js_ie': ie,
-                    'css': '../appscode/assets/css/style.min.css',
+                    'css': '../assets/css/style.min.css',
                 }))
                 .pipe(gulp.dest(paths.html.destDir + '/' + filePath));
         });
@@ -301,7 +301,7 @@ gulp.task('copy:js_ext', function () {
 });
 
 gulp.task('copy:schema', function (cb) {
-    exec("bash -c 'dir=$PWD;pushd $GOPATH/src/github.com/appscode/api;echo $dir;mkdir -p $dir/js/schema;find . -name '*.schema.json' | cpio -pdm $dir/js/schema;'", function (err, stdout, stderr) {
+    exec("bash -c 'dir=$PWD;pushd $GOPATH/src/github.com/api;echo $dir;mkdir -p $dir/js/schema;find . -name '*.schema.json' | cpio -pdm $dir/js/schema;'", function (err, stdout, stderr) {
         console.log(stdout);
         console.log(stderr);
         cb(err);
@@ -309,7 +309,7 @@ gulp.task('copy:schema', function (cb) {
 });
 
 gulp.task('copy:data', function (cb) {
-    exec("bash -c 'dir=$PWD;rm -rf $dir/js/data;pushd $GOPATH/src/github.com/appscode/data/files;echo $dir;mkdir -p $dir/js/data;cp *.json $dir/js/data;'", function (err, stdout, stderr) {
+    exec("bash -c 'dir=$PWD;rm -rf $dir/js/data;pushd $GOPATH/src/github.com/data/files;echo $dir;mkdir -p $dir/js/data;cp *.json $dir/js/data;'", function (err, stdout, stderr) {
         console.log(stdout);
         console.log(stderr);
         cb(err);
