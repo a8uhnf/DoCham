@@ -1,28 +1,15 @@
-/* eslint-disable func-names */
-
-/* REQUIRES */
 const gulp = require('gulp');
-
-// Helper libraries
 const _ = require('lodash');
 const del = require('del');
 const gutil = require('gulp-util');
 const runSequence = require('run-sequence');
 const exec = require('child_process').exec;
-
-// Linting
 const eslint = require('gulp-eslint');
 const sassLint = require('gulp-sass-lint');
-
-// Browser sync
 const browserSync = require('browser-sync').create();
-
-// File I/O
 const sass = require('gulp-sass');
 const uglify = require('gulp-uglify');
-// const replace = require('gulp-replace');
 const htmlreplace = require('gulp-html-replace');
-// Browserify
 const buffer = require('vinyl-buffer');
 const source = require('vinyl-source-stream');
 const babelify = require('babelify');
@@ -48,77 +35,27 @@ const paths = {
         srcDir: '.',
         destDir: 'dist'
     },
-    json_schema: {
-        files: 'json-schema/**/*.json',
-        srcDir: 'json-schema/**/*.json',
-        destDIR: 'dist/assets/json-schema'
-    },
     js: {
         apps: 'js/app.js',
         files: ['js/**/*.js'],
         srcDir: 'js',
         destDir: 'dist/assets/js'
     },
-
-    js_ext: {
-        files: [
-            'node_modules/jquery/dist/jquery.min.js',
-            'node_modules/jquery-validation/dist/jquery.validate.js',
-            'node_modules/ion-rangeslider/js/ion.rangeSlider.min.js',
-            'node_modules/nunjucks/browser/nunjucks-slim.min.js',
-            'node_modules/bootstrap/dist/js/bootstrap.min.js',
-            'node_modules/toastr/toastr.js',
-            'node_modules/clipboard/dist/clipboard.min.js',
-            'node_modules/codemirror/lib/codemirror.js',
-            'node_modules/codemirror/mode/shell/shell.js',
-            'node_modules/codemirror/mode/javascript/javascript.js'
-        ],
-        ie: [
-            'node_modules/html5shiv/dist/html5shiv.min.js',
-            'node_modules/respond.js/dest/respond.min.js'
-        ],
-        destDir: 'dist/assets/js_ext'
-    },
-
     templates: {
         files: ['templates/**/*.html'],
         srcDir: 'templates',
         destDir: 'dist/assets/templates'
     },
-
     scss: {
         files: ['scss/**/*.scss'],
         srcDir: 'scss',
         destDir: 'dist/assets/css'
     },
-
-    css_ext: {
-        files: [
-            'node_modules/font-awesome/css/font-awesome.min.css',
-            'node_modules/toastr/toastr.scss',
-            'node_modules/codemirror/lib/codemirror.css'
-        ]
-    },
-
     images: {
-        files: ['images/**/*', 'node_modules/ion-rangeslider/img/sprite-skin-flat.png'],
+        files: [],
         srcDir: 'images',
         destDir: 'dist/assets/images'
     },
-
-    fonts: {
-        files: [
-            'fonts/**/*',
-            'node_modules/font-awesome/fonts/fontawesome-webfont.svg',
-            'node_modules/font-awesome/fonts/FontAwesome.otf',
-            'node_modules/font-awesome/fonts/fontawesome-webfont.eot',
-            'node_modules/font-awesome/fonts/fontawesome-webfont.ttf',
-            'node_modules/font-awesome/fonts/fontawesome-webfont.woff2',
-            'node_modules/font-awesome/fonts/fontawesome-webfont.woff'
-        ],
-        srcDir: 'fonts',
-        destDir: 'dist/assets/fonts'
-    }
 };
 
 
