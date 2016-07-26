@@ -304,7 +304,6 @@ gulp.task('watch', function () {
     const fileTypesToWatch = {
         scss: 'css:dev',
         html: 'html:dev',
-        fonts: 'fonts',
         images: 'images',
         templates: 'templates'
     };
