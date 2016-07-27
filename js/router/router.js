@@ -1,4 +1,5 @@
 const Backbone = require('backbone');
+const SignupFormView = require('../views/signup/signup-form-view');
 
 module.exports = Backbone.Router.extend({
   constructor(options) {
@@ -10,5 +11,10 @@ module.exports = Backbone.Router.extend({
   },
   dashboardRoute() {
     console.log('hello world, this is dashborad route');
+    if (typeof this.firstView !== 'undefined') {
+      this.firstView.close();
+    }
+    this.firstView = new SignupFormView();
+    this.firstView.render();
   }
 });
