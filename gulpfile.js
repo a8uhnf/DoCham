@@ -41,6 +41,25 @@ const paths = {
         srcDir: 'js',
         destDir: 'dist/assets/js'
     },
+    external_js: {
+        files: [
+            'node_modules/jquery/dist/jquery.min.js',
+            'node_modules/jquery-validation/dist/jquery.validate.js',
+            'node_modules/ion-rangeslider/js/ion.rangeSlider.min.js',
+            'node_modules/nunjucks/browser/nunjucks-slim.min.js',
+            'node_modules/bootstrap/dist/js/bootstrap.min.js',
+            'node_modules/toastr/toastr.js',
+            'node_modules/clipboard/dist/clipboard.min.js',
+            'node_modules/codemirror/lib/codemirror.js',
+            'node_modules/codemirror/mode/shell/shell.js',
+            'node_modules/codemirror/mode/javascript/javascript.js'
+        ],
+        ie: [
+            'node_modules/html5shiv/dist/html5shiv.min.js',
+            'node_modules/respond.js/dest/respond.min.js'
+        ],
+        destDir: 'dist/assets/external_js'
+    },
     templates: {
         files: ['templates/**/*.html'],
         srcDir: 'templates',
@@ -113,7 +132,36 @@ gulp.task('clean', function () {
 
 /* Copies the HTML file to the distribution directory (dev) */
 gulp.task('html:dev', function () {
-    glob(paths.html.indexFiles, null, function (err, files) {
+    const ext = [];
+    _.forEach(paths.external_js.files, function(file)  {
+        ext.push('./assets/external_js/' + file.substring(file.lastIndexOf('/') + 1));
+    });
+
+    const ie = [];
+    _.forEach(paths.external_js.ie, function(file) {
+        ie.push('./assets/external_js/' + file.substring(file.lastIndexOf('/') + 1));
+    });
+
+    /*glob('./dist/appscode/assets/js_ext/!*.js', function(err, files) {
+
+    });*/
+
+    glob(paths.html.indexFiles, null, function(err, files) {
+        console.log('hello files hanifa', files);
+        _.each(files, function(file) {
+            console.log('-----------', file);
+            const filePath = file.substring(file.indexOf('/') + 1, file.lastIndexOf('/'));
+            return gulp.src(file)
+                .pipe(htmlreplace({
+                    'app_js': './assets/js/app.js',
+                    'external_js': ext,
+                    'js_ie': ie,
+                    'login_check': '', // don't look for phtkn
+                }))
+                .pipe(gulp.dest(paths.html.destDir + '/' + filePath));
+        });
+    });
+    /*glob(paths.html.indexFiles, null, function (err, files) {
         _.each(files, function (file) {
             console.log('-----------', file);
             const filePath = file.substring(file.indexOf('/') + 1, file.lastIndexOf('/'));
@@ -123,7 +171,7 @@ gulp.task('html:dev', function () {
                 }))
                 .pipe(gulp.dest(paths.html.destDir + '/' + filePath));
         });
-    });
+    });*/
 });
 
 /* Copies the HTML file to the distribution directory (prod) */
@@ -232,9 +280,9 @@ gulp.task('copy:js', function () {
 
 /* Replaces image and link absolute paths with the correct production path */
 gulp.task('copy:js_ext', function () {
-    return gulp.src([].concat(paths.js_ext.files, paths.js_ext.files))
+    return gulp.src([].concat(paths.external_js.files, paths.external_js.files))
     // .pipe(gulpRev())
-        .pipe(gulp.dest(paths.js_ext.destDir));
+        .pipe(gulp.dest(paths.external_js.destDir));
 });
 
 gulp.task('copy:schema', function (cb) {
@@ -343,7 +391,7 @@ gulp.task('prod', function (done) {
 
 
 gulp.task('default', function (done) {
-    runSequence('clean', 'build:dev', 'watch', 'serve', function (error) {
+    runSequence('clean', 'copy:js_ext', 'build:dev', 'watch', 'serve', function (error) {
         done(error && error.err);
     });
 });
