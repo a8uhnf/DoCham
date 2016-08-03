@@ -5,7 +5,7 @@ const RSVP = require('rsvp');
 module.exports = Backbone.View.extend({
   el: '',
   initialize() {
-    console.log('hello iniitalize fucntion', options);
+    // console.log('hello iniitalize fucntion', options);
     // this.$el.html(global.nunjucksEnv.render(this.SignupFormNunj));
   },
   render(options) {
@@ -17,10 +17,6 @@ module.exports = Backbone.View.extend({
     return new RSVP.Promise((resolve, reject)=> {
       $.ajax({
         url: that.url,
-        crossDomain: true,
-        xhrFields: {
-          withCredentials: true
-        },
         type: 'GET',
         dataType: 'json',
         success(result) {
@@ -37,11 +33,7 @@ module.exports = Backbone.View.extend({
     return new RSVP.Promise((resolve, reject)=> {
       $.ajax({
         url: that.url,
-        crossDomain: true,
-        xhrFields: {
-          withCredentials: true
-        },
-        data: JSON.stringify(data),
+        data: JSON.stringify(that.data),
         type: 'POST',
         dataType: 'json',
         success(result) {

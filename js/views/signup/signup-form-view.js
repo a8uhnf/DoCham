@@ -8,17 +8,26 @@ module.exports = Backbone.View.extend({
     'click .get-call': 'getCall'
   },
   getCall(e) {
-    console.log('hello post', e);
-
+    e.preventDefault();
+    console.log('hello post', this.url);
+    global.ajaxCall({url: this.url, request: 'GET'})
+        .then((res)=> {
+          console.log('hello hanifa', res);
+        });
   },
   postCall(e) {
-    console.log('hello get', e);
+    e.preventDefault();
+    console.log('hello get', this.url);
+    global.ajaxCall({url: this.url, request: 'POST', data: {hello: 'hello'}})
+        .then((res)=> {
+          console.log('hello hanifa', res);
+        });
   },
-  initialize(options) {
-    console.log('hello iniitalize fucntion', options);
+  initialize() {
+    this.url = 'http://127.0.0.1:3000/hello';
     this.$el.html(global.nunjucksEnv.render(this.SignupFormNunj));
   },
   render() {
-    console.log('hello renderfunction');
+    // console.log('hello renderfunction');
   }
 });
