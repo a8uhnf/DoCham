@@ -14,12 +14,14 @@ module.exports = Backbone.View.extend({
   },
   getRequest() {
     const that = this;
+    console.log('hello url', that.url);
     return new RSVP.Promise((resolve, reject)=> {
       $.ajax({
         url: that.url,
         type: 'GET',
         dataType: 'json',
         success(result) {
+          console.log('hello ajaxcall', result);
           resolve(result);
         },
         error(response) {
@@ -30,6 +32,7 @@ module.exports = Backbone.View.extend({
   },
   postRequest() {
     const that = this;
+    console.log('hello url and data', that.url, that.data);
     return new RSVP.Promise((resolve, reject)=> {
       $.ajax({
         url: that.url,
@@ -37,6 +40,7 @@ module.exports = Backbone.View.extend({
         type: 'POST',
         dataType: 'json',
         success(result) {
+          console.log('hello ajaxcall', result);
           resolve(result);
         },
         error(response) {
