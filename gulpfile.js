@@ -70,6 +70,12 @@ const paths = {
         srcDir: 'scss',
         destDir: 'dist/assets/css'
     },
+    css_external: {
+        files: [
+            'node_modules/bootstrap/dist/css/bootstrap.css',
+            'node_modules/bootstrap/dist/css/bootstrap-theme.css',
+        ],
+    },
     images: {
         files: [],
         srcDir: 'images',
@@ -96,7 +102,7 @@ gulp.task('scss', function () {
         }))
         .pipe(concat('scss-files.scss'));
 
-    const cssextStream = gulp.src(paths.css_ext.files)
+    const cssextStream = gulp.src(paths.css_external.files)
         .pipe(concat('css-ext-files.css'));
 
     return merge(scssStream, cssextStream)
@@ -157,6 +163,7 @@ gulp.task('html:dev', function () {
                     'external_js': ext,
                     'js_ie': ie,
                     'login_check': '', // don't look for phtkn
+                    'css': './assets/css/style.min.css',
                 }))
                 .pipe(gulp.dest(paths.html.destDir + '/' + filePath));
         });
@@ -380,7 +387,7 @@ gulp.task('serve', function () {
     });
 });
 
-gulp.task('build:dev', ['html:dev', 'templates', 'js:dev']);
+gulp.task('build:dev', ['html:dev', 'templates', 'js:dev', 'css:dev']);
 gulp.task('build:prod', ['html:prod', 'templates', 'js:prod', 'css:prod', 'images', 'fonts']);
 
 gulp.task('prod', function (done) {
