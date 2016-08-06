@@ -153,9 +153,7 @@ gulp.task('html:dev', function () {
     });*/
 
     glob(paths.html.indexFiles, null, function(err, files) {
-        console.log('hello files hanifa', files);
         _.each(files, function(file) {
-            console.log('-----------', file);
             const filePath = file.substring(file.indexOf('/') + 1, file.lastIndexOf('/'));
             return gulp.src(file)
                 .pipe(htmlreplace({
