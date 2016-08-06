@@ -1,7 +1,7 @@
 const Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
-  el: '.main',
+  el: '.navbar',
   DashboardNunj: 'dashboard-nunj.html',
   events: {
 
@@ -12,7 +12,6 @@ module.exports = Backbone.View.extend({
   },
   getCall(e) {
     e.preventDefault();
-    console.log('hello post', this.url);
     global.ajaxCall({url: this.url, request: 'GET'})
         .then((res)=> {
           console.log('hello hanifa', res);
@@ -30,4 +29,3 @@ module.exports = Backbone.View.extend({
     // console.log('hello renderfunction');
   }
 });
-
