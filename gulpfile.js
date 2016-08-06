@@ -147,11 +147,6 @@ gulp.task('html:dev', function () {
     _.forEach(paths.external_js.ie, function(file) {
         ie.push('./assets/external_js/' + file.substring(file.lastIndexOf('/') + 1));
     });
-
-    /*glob('./dist/appscode/assets/js_ext/!*.js', function(err, files) {
-
-    });*/
-
     glob(paths.html.indexFiles, null, function(err, files) {
         _.each(files, function(file) {
             const filePath = file.substring(file.indexOf('/') + 1, file.lastIndexOf('/'));
@@ -166,17 +161,6 @@ gulp.task('html:dev', function () {
                 .pipe(gulp.dest(paths.html.destDir + '/' + filePath));
         });
     });
-    /*glob(paths.html.indexFiles, null, function (err, files) {
-        _.each(files, function (file) {
-            console.log('-----------', file);
-            const filePath = file.substring(file.indexOf('/') + 1, file.lastIndexOf('/'));
-            return gulp.src(file)
-                .pipe(htmlreplace({
-                    'app_js': './assets/js/app.js',
-                }))
-                .pipe(gulp.dest(paths.html.destDir + '/' + filePath));
-        });
-    });*/
 });
 
 /* Copies the HTML file to the distribution directory (prod) */
