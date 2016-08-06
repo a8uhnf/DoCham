@@ -1,5 +1,6 @@
 const Backbone = require('backbone');
 const SignupFormView = require('../views/signup/signup-form-view');
+const DashboardView = require('../views/home/dashboard-view');
 
 module.exports = Backbone.Router.extend({
   constructor(options) {
@@ -7,14 +8,16 @@ module.exports = Backbone.Router.extend({
     Backbone.Router.prototype.constructor.call(this, options);
   },
   routes: {
-    '': 'dashboardRoute'
+    '': 'dashboardRoute',
+    '/signup': 'registryUser'
+  },
+  registryUser() {
+    this.firstView = new SignupFormView();
+    this.firstView.render();
   },
   dashboardRoute() {
     console.log('hello world, this is dashborad route');
-    if (typeof this.firstView !== 'undefined') {
-      this.firstView.close();
-    }
-    this.firstView = new SignupFormView();
+    this.firstView = new DashboardView();
     this.firstView.render();
   }
 });

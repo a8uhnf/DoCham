@@ -73,7 +73,7 @@ const paths = {
     css_external: {
         files: [
             'node_modules/bootstrap/dist/css/bootstrap.css',
-            'node_modules/bootstrap/dist/css/bootstrap-theme.css',
+            // 'node_modules/bootstrap/dist/css/bootstrap-theme.css',
         ],
     },
     images: {
