@@ -2,7 +2,7 @@ const Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
   el: '.main',
-  SignupFormNunj: 'signup-form-nunj.html',
+  SignupFormNunj: 'dashboard-nunj.html',
   events: {
     'click .post-call': 'postCall',
     'click .get-call': 'getCall'

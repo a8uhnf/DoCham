@@ -77,9 +77,14 @@ const paths = {
         ],
     },
     images: {
-        files: [],
+        files: ['images/**/*'],
         srcDir: 'images',
         destDir: 'dist/assets/images'
+    },
+    fonts: {
+        files: [],
+        srcDir: 'fonts',
+        destDir: 'dist/assets/fonts'
     },
 };
 
@@ -125,6 +130,7 @@ gulp.task('css:prod', function (done) {
 
 /* Copies files to the distribution directory */
 ['images', 'fonts'].forEach(function (fileType) {
+    console.log('hello world');
     gulp.task(fileType, function () {
         return gulp.src(paths[fileType].files)
             .pipe(gulp.dest(paths[fileType].destDir));
@@ -369,7 +375,7 @@ gulp.task('serve', function () {
     });
 });
 
-gulp.task('build:dev', ['html:dev', 'templates', 'js:dev', 'css:dev']);
+gulp.task('build:dev', ['html:dev', 'templates', 'js:dev', 'css:dev', 'images', 'fonts']);
 gulp.task('build:prod', ['html:prod', 'templates', 'js:prod', 'css:prod', 'images', 'fonts']);
 
 gulp.task('prod', function (done) {

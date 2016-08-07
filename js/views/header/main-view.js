@@ -2,7 +2,7 @@ const Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
   el: '.navbar',
-  DashboardNunj: 'dashboard-nunj.html',
+  DashboardNunj: 'header-nunj.html',
   events: {
 
   },
