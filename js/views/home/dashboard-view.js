@@ -4,7 +4,9 @@ module.exports = Backbone.View.extend({
   el: '.main',
   SignupFormNunj: 'dashboard-nunj.html',
   events: {
-    'click #dashboard-area': 'selectDashboardArea'
+    'click #dashboard-area': 'selectDashboardArea',
+    'click #do-search': 'doSearch',
+    'click #location-detect': 'detectLocation'
   },
   initialize() {
     this.url = 'http://127.0.0.1:3000/hello';
@@ -16,5 +18,11 @@ module.exports = Backbone.View.extend({
   },
   render() {
     // console.log('hello renderfunction');
+  },
+  doSearch() {
+    console.log('hello doSearch');
+  },
+  detectLocation() {
+    console.log('hello detectLocation');
   }
 });
