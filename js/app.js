@@ -1,4 +1,6 @@
 const Backbone = require('backbone');
+const $ = require('jquery');
+const RSVP = require('rsvp');
 // VIEWS
 const HeaderMainView = require('./views/header/main-view');
 // Router
@@ -13,6 +15,21 @@ global.headerView = ()=> {
   global.headerMainView.render();
 };
 
+global.locationAjaxCall = (url)=> {
+  return new RSVP.Promise((resolve, reject)=> {
+    $.ajax({
+      url: url,
+      type: 'POST',
+      success(result) {
+        console.log('hello ajaxcall', result);
+        resolve(result);
+      },
+      error(response) {
+        reject(response);
+      }
+    });
+  });
+};
 global.ajaxCall = (options)=> {
   ajaxCall.render(options);
   if (options.request === 'GET') {

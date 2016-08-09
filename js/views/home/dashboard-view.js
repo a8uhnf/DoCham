@@ -24,5 +24,10 @@ module.exports = Backbone.View.extend({
   },
   detectLocation() {
     console.log('hello detectLocation');
+    const apiKey = 'AIzaSyAit6-mcjjVYwRtoutwwQSweh_GfInYXaI';
+    global.ajaxCall({url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=' + apiKey, request: 'POST', data: {}})
+        .then((res)=> {
+          console.log('google api response', res);
+        });
   }
 });
